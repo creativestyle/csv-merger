@@ -1,0 +1,13 @@
+{
+    "name": "creativestyle/csv-merger",
+    "description": "Library for merging CSV files",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Marek Zabrowarny",
+            "email": "marek.zabrowarny@creativestyle.pl"
+        }
+    ],
+    "require": {
+    }
+}
