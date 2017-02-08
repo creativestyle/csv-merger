@@ -9,5 +9,17 @@
         }
     ],
     "require": {
-    }
+        "symfony/console": "^3.2.3"
+    },
+    "require-dev": {
+        "phploc/phploc": "^3.0",
+        "phpmd/phpmd": "^2.6",
+        "squizlabs/php_codesniffer": "^2.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "Creativestyle\\CsvMerger\\": "src"
+        }
+    },
+    "bin": ["bin/csv-merger"]
 }

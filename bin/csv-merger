@@ -1,0 +1,25 @@
+#!/usr/bin/env php
+<?php
+/**
+ * CSV Merger
+ *
+ * @author    Marek Zabrowarny <marek.zabrowarny@creativestyle.pl>
+ * @copyright 2017 creativestyle
+ */
+
+$vendorDir = __DIR__ . '/../vendor';
+
+if (PHP_SAPI !== 'cli') {
+    echo sprintf("%s must be run as a CLI application\n", basename(__FILE__));
+    exit(1);
+}
+
+try {
+    require $vendorDir . '/autoload.php';
+} catch (\Exception $e) {
+    echo 'Autoload error: ' . $e->getMessage();
+    exit(1);
+}
+
+$console = new \Creativestyle\CsvMerger\Console('CSV Merger');
+$console->run();

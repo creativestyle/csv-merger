@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * CSV Merger
+ *
+ * @author    Marek Zabrowarny <marek.zabrowarny@creativestyle.pl>
+ * @copyright 2017 creativestyle
+ */
+-->
+<ruleset name="CSV Merger Coding Standards">
+    <description>CSV Merger coding standards</description>
+    <rule ref="PSR2"/>
+</ruleset>
