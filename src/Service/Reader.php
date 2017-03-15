@@ -7,12 +7,12 @@
  */
 
 
-namespace Creativestyle\CsvMerger\Reader;
+namespace Creativestyle\CsvMerger\Service;
 
+use Creativestyle\CsvMerger\Contracts\Service\ReaderInterface;
 use Creativestyle\CsvMerger\Exception;
-use Creativestyle\CsvMerger\ReaderInterface;
 
-class Csv implements ReaderInterface
+class Reader implements ReaderInterface
 {
     /**
      * @param string $path

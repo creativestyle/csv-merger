@@ -122,6 +122,6 @@ class DataObject
                 $key = $this->underscore(substr($method, 3));
                 return $this->hasData($key);
         }
-        throw new Exception('Invalid method %1::%2', [get_class($this), $method]);
+        throw new Exception(sprintf('Invalid method %s::%s()', get_class($this), $method));
     }
 }

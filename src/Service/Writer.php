@@ -7,12 +7,12 @@
  */
 
 
-namespace Creativestyle\CsvMerger\Writer;
+namespace Creativestyle\CsvMerger\Service;
 
+use Creativestyle\CsvMerger\Contracts\Service\WriterInterface;
 use Creativestyle\CsvMerger\Exception;
-use Creativestyle\CsvMerger\WriterInterface;
 
-class Csv implements WriterInterface
+class Writer implements WriterInterface
 {
     /**
      * @param string $path
@@ -49,13 +49,11 @@ class Csv implements WriterInterface
     }
 
     /**
-     * @param array $data
-     * @param string $file
-     * @return bool
+     * @inheritdoc
      */
     public function write(array $data, $file)
     {
         $this->createContainerDirectory($file);
-        return $this->saveToFile($data, $file);
+        $this->saveToFile($data, $file);
     }
 }

@@ -9,16 +9,24 @@
         }
     ],
     "require": {
-        "symfony/console": "^3.2.3"
+        "symfony/console": "^3.2.3",
+        "symfony/dependency-injection": "^3.2.3"
     },
     "require-dev": {
         "phploc/phploc": "^3.0",
         "phpmd/phpmd": "^2.6",
-        "squizlabs/php_codesniffer": "^2.8"
+        "squizlabs/php_codesniffer": "^2.8",
+        "phpunit/phpunit": "^6.0",
+        "mikey179/vfsStream": "^1.6.4"
     },
     "autoload": {
         "psr-4": {
             "Creativestyle\\CsvMerger\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Creativestyle\\CsvMerger\\Test\\": "tests"
         }
     },
     "bin": ["bin/csv-merger"]

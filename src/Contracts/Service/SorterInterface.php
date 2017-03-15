@@ -7,14 +7,13 @@
  */
 
 
-namespace Creativestyle\CsvMerger;
+namespace Creativestyle\CsvMerger\Contracts\Service;
 
-interface WriterInterface
+interface SorterInterface
 {
     /**
-     * @param array $data
      * @param string $file
-     * @return bool
+     * @return void
      */
-    public function write(array $data, $file);
+    public function sort($file);
 }

@@ -7,7 +7,7 @@
  */
 
 
-namespace Creativestyle\CsvMerger;
+namespace Creativestyle\CsvMerger\Contracts\Service;
 
 interface ReaderInterface
 {
