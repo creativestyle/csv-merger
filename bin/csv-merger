@@ -7,15 +7,19 @@
  * @copyright 2017 creativestyle
  */
 
-$vendorDir = __DIR__ . '/../vendor';
-
 if (PHP_SAPI !== 'cli') {
     echo sprintf("%s must be run as a CLI application\n", basename(__FILE__));
     exit(1);
 }
 
 try {
-    require $vendorDir . '/autoload.php';
+    if (file_exists(__DIR__ . '/../../../autoload.php')) {
+        // Component of a composer-based project
+        require_once __DIR__ . '/../../../autoload.php';
+    } else {
+        // Standalone application
+        require_once __DIR__ . '/../vendor/autoload.php';
+    }
 } catch (\Exception $e) {
     echo 'Autoload error: ' . $e->getMessage();
     exit(1);

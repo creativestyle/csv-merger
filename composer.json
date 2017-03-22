@@ -10,6 +10,7 @@
     ],
     "require": {
         "symfony/console": "^3.2.3",
+        "symfony/config": "~3.0",
         "symfony/dependency-injection": "^3.2.3"
     },
     "require-dev": {
