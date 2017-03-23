@@ -31,10 +31,17 @@ class MergeCommandTest extends TestCase
      * @param string $outputPath
      * @param bool $preferRight
      * @param bool $sort
-     * @return \Symfony\Component\Console\Input\InputInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @param bool $sanitize
+     * @return \PHPUnit_Framework_MockObject_MockObject|\Symfony\Component\Console\Input\InputInterface
      */
-    protected function getInputMock($leftFilePath, $rightFilePath, $outputPath, $preferRight = false, $sort = false)
-    {
+    protected function getInputMock(
+        $leftFilePath,
+        $rightFilePath,
+        $outputPath,
+        $preferRight = false,
+        $sort = false,
+        $sanitize = false
+    ) {
         $inputMock = $this->getMockBuilder(\Symfony\Component\Console\Input\InputInterface::class)
             ->getMock();
 
@@ -46,7 +53,8 @@ class MergeCommandTest extends TestCase
 
         $optionsMap = [
             [MergeCommand::INPUT_KEY_PREFER_RIGHT, $preferRight],
-            [MergeCommand::INPUT_KEY_SORT, $sort]
+            [MergeCommand::INPUT_KEY_SORT, $sort],
+            [MergeCommand::INPUT_KEY_SANITIZE, $sanitize]
         ];
 
         $inputMock->method('getArgument')
@@ -122,6 +130,39 @@ class MergeCommandTest extends TestCase
         $this->assertEquals(
             $this->readCsvData($this->getFixtureFilePath($mergedFile)),
             $this->readCsvData($mergedFileMockPath)
+        );
+    }
+
+    /**
+     * @param string $leftFile
+     * @param string $rightFile
+     * @param string $mergedFile
+     * @param bool $preferRightFile
+     * @dataProvider filesForMergeAndSanitizeProvider
+     */
+    public function testItMergesAndSanitizesTwoCsvFiles($leftFile, $rightFile, $mergedFile, $preferRightFile = false)
+    {
+        $leftFileMockPath = $this->mockCsvFileFromFilesystem($this->getFixtureFilePath($leftFile));
+        $rightFileMockPath = $this->mockCsvFileFromFilesystem($this->getFixtureFilePath($rightFile));
+        $mergedFileMockPath = $this->fsRoot->url() . DIRECTORY_SEPARATOR . $mergedFile;
+
+        $commandExitCode = $this->commandInstance->run(
+            $this->getInputMock(
+                $leftFileMockPath,
+                $rightFileMockPath,
+                $mergedFileMockPath,
+                $preferRightFile,
+                false,
+                true
+            ),
+            $this->getOutputMock()
+        );
+
+        $this->assertEquals(0, $commandExitCode);
+        $this->assertTrue($this->fsRoot->hasChild($mergedFile));
+        $this->assertEquals(
+            $this->readCsvData($this->getFixtureFilePath($mergedFile), true),
+            $this->readCsvData($mergedFileMockPath, true)
         );
     }
 
