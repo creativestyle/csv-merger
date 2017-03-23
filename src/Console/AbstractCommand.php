@@ -29,6 +29,7 @@ abstract class AbstractCommand extends Command
                 'reader' => \Creativestyle\CsvMerger\Service\Reader::class,
                 'writer' => \Creativestyle\CsvMerger\Service\Writer::class,
                 'merger' => \Creativestyle\CsvMerger\Service\Merger::class,
+                'sanitizer' => \Creativestyle\CsvMerger\Service\Sanitizer::class,
                 'sorter' => \Creativestyle\CsvMerger\Service\Sorter::class,
                 'merge_strategy' => \Creativestyle\CsvMerger\Service\MergeStrategy\OddPair::class
             ]);
@@ -51,5 +52,13 @@ abstract class AbstractCommand extends Command
     protected function getCsvSorter()
     {
         return $this->getServiceContainer()->get('sorter');
+    }
+
+    /**
+     * @return \Creativestyle\CsvMerger\Contracts\Service\SanitizerInterface
+     */
+    protected function getCsvSanitizer()
+    {
+        return $this->getServiceContainer()->get('sanitizer');
     }
 }

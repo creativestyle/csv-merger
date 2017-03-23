@@ -22,6 +22,7 @@ class MergeCommand extends AbstractCommand
     const INPUT_KEY_OUTPUT = 'output-path';
     const INPUT_KEY_PREFER_RIGHT = 'prefer-right';
     const INPUT_KEY_SORT = 'sort';
+    const INPUT_KEY_SANITIZE = 'sanitize';
 
     protected function configure()
     {
@@ -53,6 +54,12 @@ class MergeCommand extends AbstractCommand
                 null,
                 InputOption::VALUE_NONE,
                 'Sort rows in the output CSV file'
+            ),
+            new InputOption(
+                self::INPUT_KEY_SANITIZE,
+                null,
+                InputOption::VALUE_NONE,
+                'Remove rows with columns of the same value'
             )
         ]);
     }
@@ -68,7 +75,8 @@ class MergeCommand extends AbstractCommand
             'right_file' => $input->getArgument(self::INPUT_KEY_RIGHT_FILE),
             'output' => $input->getArgument(self::INPUT_KEY_OUTPUT),
             'prefer_right' => $input->getOption(self::INPUT_KEY_PREFER_RIGHT),
-            'sort' => $input->getOption(self::INPUT_KEY_SORT)
+            'sort' => $input->getOption(self::INPUT_KEY_SORT),
+            'sanitize' => $input->getOption(self::INPUT_KEY_SANITIZE),
         ]);
     }
 
@@ -89,6 +97,10 @@ class MergeCommand extends AbstractCommand
                 default:
                     $merger->merge($config->getLeftFile(), $config->getRightFile(), $config->getOutput());
                     break;
+            }
+            if ($config->getSanitize()) {
+                $sanitizer = $this->getCsvSanitizer();
+                $sanitizer->sanitize($config->getOutput());
             }
             if ($config->getSort()) {
                 $sorter = $this->getCsvSorter();

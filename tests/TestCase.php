@@ -168,6 +168,19 @@ class TestCase extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+    public function filesForMergeAndSanitizeProvider()
+    {
+        return [
+            ['simple_left.csv', 'simple_right.csv', 'simple_sanitized.csv'],
+            ['utf8_left.csv', 'utf8_right.csv', 'utf8_sanitized.csv'],
+            ['different_left.csv', 'different_right.csv', 'different_sanitized.csv'],
+            ['quirk_left.csv', 'quirk_right.csv', 'quirk_sanitized.csv']
+        ];
+    }
+
+    /**
+     * @return array
+     */
     public function filesForSortProvider()
     {
         return [
@@ -175,6 +188,19 @@ class TestCase extends \PHPUnit\Framework\TestCase
             ['utf8_merged.csv', 'utf8_sorted.csv'],
             ['different_merged.csv', 'different_sorted.csv'],
             ['quirk_merged.csv', 'quirk_sorted.csv']
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function filesForSanitizeProvider()
+    {
+        return [
+            ['simple_merged.csv', 'simple_sanitized.csv'],
+            ['utf8_merged.csv', 'utf8_sanitized.csv'],
+            ['different_merged.csv', 'different_sanitized.csv'],
+            ['quirk_merged.csv', 'quirk_sanitized.csv']
         ];
     }
 }
