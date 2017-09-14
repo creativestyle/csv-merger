@@ -8,6 +8,7 @@
             "email": "marek.zabrowarny@creativestyle.pl"
         }
     ],
+    "license": "MIT",
     "require": {
         "symfony/console": "^3.2.3",
         "symfony/config": "~3.0",
