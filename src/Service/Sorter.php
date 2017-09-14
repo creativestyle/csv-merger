@@ -70,7 +70,7 @@ class Sorter implements SorterInterface
         foreach ($this->csvReader->read($file) as $row) {
             $this->addRow($row);
         }
-        uksort($this->data, 'strnatcasecmp');
+        ksort($this->data, SORT_STRING);
         $this->csvWriter->write(array_values($this->data), $file);
     }
 }
